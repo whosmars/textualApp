@@ -137,3 +137,50 @@ def update_user(user_id: UUID, updated_user : User):
     return {
         "message": "User not found"
     }     
+
+#DELETE
+
+@app.delete("/review/{review_id}")
+def delete_review(review_id: UUID):
+    for index, review in enumerate(reviews):
+        if review.review_id == review_id:
+            deleted_review = reviews.pop(index)
+
+            return {
+                "message": "Review deleted successfully",
+                "deleted_review": deleted_review
+            }
+
+    return {
+        "message": "Review not found"
+    }
+
+@app.delete("/user/{user_id}")
+def delete_user(user_id: UUID):
+    for index, user in enumerate(users):
+        if user.user_id == user_id:
+            deleted_user = users.pop(index)
+
+            return {
+                "message": "User deleted successfully",
+                "deleted_user": deleted_user
+            }
+
+    return {
+        "message": "User not found"
+    }
+
+@app.delete("/movie/{movie_id}")
+def delete_movie(movie_id: UUID):
+    for index, movie in enumerate(movies):
+        if movie.movie_id == movie_id:
+            deleted_movie = movies.pop(index)
+
+            return {
+                "message": "Movie deleted successfully",
+                "deleted_movie": deleted_movie
+            }
+
+    return {
+        "message": "Movie not found"
+    }
