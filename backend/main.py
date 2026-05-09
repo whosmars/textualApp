@@ -7,6 +7,7 @@ app = FastAPI()
 
 reviews = []
 users = []
+movies = []
 
 @app.get("/")
 def read_root():
@@ -52,13 +53,24 @@ def get_reviews_by_id (review_id : UUID):
     for review in reviews:
         if review.review_id == review_id:
             return {
-                "message": "User Found Succesfully",
+                "message": "Review Found Succesfully",
                 "user_by_id" : review
             }
     return {
         "message": "Review Not Found",
     }
-    
+
+@app.get("/movie/{movie_id}")
+def get_reviews_by_id (movie_id : UUID):
+    for movie in movies:
+        if movie.movie_id == movie_id:
+            return {
+                "message": "Movie Found Succesfully",
+                "user_by_id" : movie
+            }
+    return {
+        "message": "Movie Not Found",
+    }
 
 @app.post("/review")
 def create_review(review: Review):
@@ -76,6 +88,14 @@ def create_user(user: User):
         "Object": user
     }
 
+@app.post("movie")
+def create_movie(movie : Movie):
+    movies.append(movie)
+    return {
+        "message": "Movie created successfully",
+        "Object": movie
+    }
+
 
 @app.get("/reviews")
 def get_reviews():
@@ -84,4 +104,8 @@ def get_reviews():
 @app.get("/users")
 def get_user():
     return users
+
+@app.get("/movies")
+def get_movies():
+    return movies
             
