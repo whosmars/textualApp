@@ -54,19 +54,19 @@ def get_reviews_by_id (review_id : UUID):
         if review.review_id == review_id:
             return {
                 "message": "Review Found Succesfully",
-                "user_by_id" : review
+                "review_by_id" : review
             }
     return {
         "message": "Review Not Found",
     }
 
 @app.get("/movie/{movie_id}")
-def get_reviews_by_id (movie_id : UUID):
+def get_movies_by_id (movie_id : UUID):
     for movie in movies:
         if movie.movie_id == movie_id:
             return {
                 "message": "Movie Found Succesfully",
-                "user_by_id" : movie
+                "movie_by_id" : movie
             }
     return {
         "message": "Movie Not Found",
@@ -88,7 +88,7 @@ def create_user(user: User):
         "Object": user
     }
 
-@app.post("movie")
+@app.post("/movie")
 def create_movie(movie : Movie):
     movies.append(movie)
     return {
